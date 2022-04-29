@@ -7,12 +7,7 @@
  */
 
 import React from 'react';
-import {
-  Text,
-  Pressable,
-  View,
-  StyleSheet
-} from 'react-native';
+import {Text, Pressable, View, StyleSheet} from 'react-native';
 import axios from 'axios';
 
 function App() {
@@ -35,18 +30,36 @@ function App() {
       });
   };
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>{advice}</Text>
-      <View style={{padding: 20, backgroundColor: 'red', borderRadius:10, marginTop: 50}}>
-      <Pressable onPress={() => getAdvice()}>
-        <Text>
-          Get Advice
-        </Text>
-      </Pressable>
+    <View style={style.rootContainer}>
+      <View style={style.text}>
+        <Text>{advice}</Text>
+      </View>
+      <View style={style.button}>
+        <Pressable onPress={() => getAdvice()}>
+          <Text>Get Advice</Text>
+        </Pressable>
       </View>
     </View>
   );
 }
 export default App;
 
-
+const style = StyleSheet.create({
+  rootContainer: {
+    flex: 1, 
+    alignItems: 'center', 
+    justifyContent: 'center'
+  },
+  button: {
+    padding: 20,
+    backgroundColor: '#1E90FF',
+    borderRadius: 10,
+    marginTop: 50,
+  },
+  text: {
+    padding: 5,
+    borderRadius: 5,
+    borderWidth: 1,
+    margin: 10
+  },
+});
