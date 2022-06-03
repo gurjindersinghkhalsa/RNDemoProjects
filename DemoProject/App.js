@@ -6,42 +6,78 @@
  * @flow strict-local
  */
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
   View,
   Pressable,
+  ActivityIndicator,
 } from 'react-native';
 function App() {
   const [data, setData] = useState([]);
+  const [showActivity, setshowActivity] = useState(false);
 
-  async function getData() {
+  useEffect(() => {
+    setshowActivity(true);
+    getMovies();
+  }, []);
+
+  async function getMovies() {
+    setshowActivity(true);
     try {
-    const response = await fetch('https://reactnative.dev/movies.json');
-    const data = await response.json();
-    setData(data.movies);
-    } catch(error){
-      alert(error)
+      const response = await fetch('https://reactnative.dev/movies.json');
+      const data = await response.json();
+      setshowActivity(false);
+      setData(data.movies);
+    } catch (error) {
+      alert(error);
+    } finally {
     }
   }
-  function resetData(){
-    setData([])
+  function resetData() {
+    setData([]);
   }
+
   return (
     <View style={style.root}>
-      {data && data.map(model => <Text key={model.title}>{model.title}</Text>)}
-      <Pressable onPress={getData}>
-        <Text>Get Movies Name</Text>
+      <ActivityIndicator
+        animating={showActivity}
+        size="large"
+        color="#999999"
+      />
+      {data &&
+        data.map(model => (
+          <Text style={[style.text, {color: 'black'}]} key={model.title}>
+            {model.title}
+          </Text>
+        ))}
+      <Pressable onPress={getMovies}>
+        <View style={style.button}>
+          <Text style={style.text}>Get Movies Name</Text>
+        </View>
       </Pressable>
       <Pressable onPress={resetData}>
-        <Text>Reset</Text>
+        <View style={style.button}>
+          <Text style={style.text}>Reset</Text>
+        </View>
       </Pressable>
     </View>
   );
 }
 export default App;
 const style = StyleSheet.create({
+  button: {
+    padding: 10,
+    backgroundColor: 'black',
+    margin: 10,
+    borderRadius: 10,
+  },
+  text: {
+    color: 'white',
+    fontSize: 20,
+    padding: 10,
+  },
   opacity: {
     opacity: 0.75,
   },
@@ -49,5 +85,6 @@ const style = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'pink',
   },
 });
