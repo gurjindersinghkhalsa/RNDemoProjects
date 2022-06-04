@@ -26,10 +26,13 @@ function App() {
   async function getMovies() {
     setshowActivity(true);
     try {
-      const response = await fetch('https://reactnative.dev/movies.json');
+      const response = await fetch('https://jsonplaceholder.typicode.com/users');
       const data = await response.json();
       setshowActivity(false);
-      setData(data.movies);
+      // setData(data.movies);
+      setData(data);
+      console.log(data)
+
     } catch (error) {
       alert(error);
     } finally {
@@ -48,8 +51,8 @@ function App() {
       />
       {data &&
         data.map(model => (
-          <Text style={[style.text, {color: 'black'}]} key={model.title}>
-            {model.title}
+          <Text style={[style.text, {color: 'black'}]} key={model.id}>
+            {model.email}
           </Text>
         ))}
       <Pressable onPress={getMovies}>
