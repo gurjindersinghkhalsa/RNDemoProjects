@@ -9,21 +9,31 @@ class App extends React.Component {
     };
   }
   doIncrementNow() {
-    console.log('This is called');
     this.setState({value: this.state.value + 1}, () => {
       console.log('Final value is ->', this.state.value);
     });
   }
+  doResetNow() {
+    this.setState({value: 0})
+  }
   render() {
     return (
       <View style={styles.rootContainer}>
+         <Pressable
+          onPress={() => {
+            this.doResetNow();
+          }}
+          style={(callback) => (callback.pressed ? {opacity: 0.3} : {opacity: 1})}>
+          <Text style={[styles.text, {marginBottom: 20}]}>Reset</Text>
+        </Pressable>
         <Pressable
           onPress={() => {
             this.doIncrementNow();
-          }}>
+          }}
+          style={(callback) => (callback.pressed ? {opacity: 0.3} : {opacity: 1})}>
           <Text style={styles.text}>Increment</Text>
         </Pressable>
-        <Text style={[styles.text, {marginTop: 20}]}>
+        <Text style={[styles.text, {marginTop: 20, backgroundColor: 'white'}]}>
           Value is {this.state.value}
         </Text>
       </View>
