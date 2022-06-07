@@ -1,22 +1,6 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  Pressable,
-  View,
-} from 'react-native';
-// function App() {
+import {View, Text, Pressable, StyleSheet} from 'react-native';
+
 class App extends React.Component {
   constructor() {
     super();
@@ -24,25 +8,37 @@ class App extends React.Component {
       value: 0,
     };
   }
+  doIncrementNow() {
+    console.log('This is called');
+    this.setState({value: this.state.value + 1}, () => {
+      console.log('Final value is ->', this.state.value);
+    });
+  }
   render() {
     return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <View style={styles.rootContainer}>
         <Pressable
           onPress={() => {
-            this.setState({value: this.state.value + 1}, () => {
-              console.log('Increment', this.state.value);
-            });
+            this.doIncrementNow();
           }}>
-          <Text
-            style={{backgroundColor: 'pink', padding: 15, fontWeight: '600'}}>
-            Increment
-          </Text>
+          <Text style={styles.text}>Increment</Text>
         </Pressable>
-        <Text
-        style={{padding: 15, fontWeight: '600'}}>
-          Vale is {this.state.value}</Text>
+        <Text style={[styles.text, {marginTop: 20}]}>
+          Value is {this.state.value}
+        </Text>
       </View>
     );
   }
 }
 export default App;
+const styles = StyleSheet.create({
+  text: {
+    backgroundColor: 'pink',
+    padding: 15,
+  },
+  rootContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
