@@ -10,6 +10,9 @@ target 'DemoProject' do
   # Flags change depending on the env values.
   flags = get_default_flags()
 
+  permissions_path = '../node_modules/react-native-permissions/ios'
+  pod 'Permission-Microphone', :path => "#{permissions_path}/Microphone"
+
   use_react_native!(
     :path => config[:reactNativePath],
     # to enable hermes on iOS, change `false` to `true` and then install pods
@@ -23,6 +26,7 @@ target 'DemoProject' do
     inherit! :complete
     # Pods for testing
   end
+
 
   # Enables Flipper.
   #
