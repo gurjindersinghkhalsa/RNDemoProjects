@@ -8,55 +8,37 @@
 
 import React from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   View,
   TextInput,
   KeyboardAvoidingView,
   Pressable,
+  Alert,
 } from 'react-native';
 function App() {
   return (
     <KeyboardAvoidingView
-    style={{flex:1,backgroundColor:'white'}}
+      style={styles.keyboardStyle}
       behavior="padding"
       keyboardVerticalOffset={0}>
       <View style={styles.rootContainer}>
-        <View
-          style={{
-            backgroundColor: 'pink',
-            padding: 20,
-            borderRadius: 10,
-            width: '80%',
-            justifyContent: 'center',
-          }}>
-          <Text style={{marginBottom: 15}}>UserName</Text>
+        <View style={styles.viewTextInput}>
+          <Text style={styles.userName}>UserName</Text>
+          <TextInput placeholder="Enter UserName"  
+          placeholderTextColor="white"
+          style={styles.textInput} />
+          <Text style={[styles.userName, {marginTop: 20}]}>Password</Text>
           <TextInput
-            placeholder="Enter your Name"
-            style={{width: '100%', borderWidth: 1, padding: 10}}
-          />
-          <Text style={{marginBottom: 15, marginTop: 20}}>Password</Text>
-          <TextInput
-            placeholder="Enter your Password"
-            style={{width: '100%', borderWidth: 1, padding: 10}}
+            placeholder="Enter Password"
+            placeholderTextColor="white"
+            style={styles.textInput}
             secureTextEntry={true}
           />
         </View>
-        <View
-          style={{
-            backgroundColor: 'pink',
-            padding: 20,
-            margin: 30,
-            width: '80%',
-            borderRadius: 50,
-          }}>
-          <Pressable onPress={() => alert('Successfull')}>
-            <Text style={{color: 'black',fontWeight:'500', fontSize: 24, textAlign: 'center'}}>
-              Login
-            </Text>
+        <View style={styles.viewLogin}>
+          <Pressable onPress={() => Alert.alert('Successful')}>
+            <Text style={styles.textLogin}>Login</Text>
           </Pressable>
         </View>
       </View>
@@ -70,5 +52,35 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
+  },
+  keyboardStyle: {flex: 1, backgroundColor: 'white'},
+  viewTextInput: {
+    backgroundColor: 'rgb(10, 10, 120)',
+    padding: 20,
+    borderRadius: 10,
+    width: '80%',
+    justifyContent: 'center',
+  },
+  userName: {marginBottom: 15, color: 'white', fontWeight: '500', fontSize: 18},
+  textInput: {
+    width: '100%',
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 5,
+    borderColor: 'white',
+    color: 'white',
+  },
+  textLogin: {
+    color: 'white',
+    fontWeight: '700',
+    fontSize: 24,
+    textAlign: 'center',
+  },
+  viewLogin: {
+    backgroundColor: 'rgb(10, 10, 110)',
+    padding: 20,
+    margin: 30,
+    width: '80%',
+    borderRadius: 50,
   },
 });
