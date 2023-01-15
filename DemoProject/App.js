@@ -16,7 +16,19 @@ import {
   Pressable,
   Alert,
 } from 'react-native';
+
 function App() {
+  const [uName, setuName] = React.useState('');
+  const [uPass, setuPass] = React.useState('');
+
+  const checkCreds=()=> {
+      if(uPass === '' || uName === '') {
+        alert('Please fill all fields')
+      } else {
+        alert('Succesfull')
+      }
+  }
+
   return (
     <KeyboardAvoidingView
       style={styles.keyboardStyle}
@@ -25,23 +37,29 @@ function App() {
       <View style={styles.rootContainer}>
         <View style={styles.viewTextInput}>
           <Text style={styles.userName}>UserName</Text>
-          <TextInput placeholder="Enter UserName"  
+          <TextInput 
+          placeholder="Enter UserName"  
           placeholderTextColor="white"
-          style={styles.textInput} />
+          style={styles.textInput}
+          onChangeText={setuName}
+          value={uName}
+           />
           <Text style={[styles.userName, {marginTop: 20}]}>Password</Text>
           <TextInput
             placeholder="Enter Password"
             placeholderTextColor="white"
             style={styles.textInput}
             secureTextEntry={true}
+            onChangeText={setuPass}
+            value={uPass}
           />
         </View>
-        <View style={styles.viewLogin}>
-          <Pressable onPress={() => Alert.alert('Successful')}>
+      </View>
+       <View style={styles.viewLogin}>
+          <Pressable onPress={() => checkCreds()}>
             <Text style={styles.textLogin}>Login</Text>
           </Pressable>
         </View>
-      </View>
     </KeyboardAvoidingView>
   );
 }
@@ -51,7 +69,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'gray',
+    backgroundColor: 'white',
   },
   keyboardStyle: {flex: 1, backgroundColor: 'white'},
   viewTextInput: {
