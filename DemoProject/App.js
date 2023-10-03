@@ -6,37 +6,40 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useReducer} from 'react';
 import {Text, Pressable, View, StyleSheet} from 'react-native';
-import axios from 'axios';
+import {act} from 'react-test-renderer';
 
 function App() {
-  const [advice, setAdvice] = React.useState('No Advice');
-
-  const getRandomId = (min, max) => {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return (Math.floor(Math.random() * (max - min + 1)) + min).toString();
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case 'Add':
+        return (state += 1);
+      case 'Subtract':
+        return (state -= 1);
+      default:
+        return state;
+    }
   };
+  const [state, dispatch] = useReducer(reducer, 0);
 
-  const getAdvice = () => {
-    axios
-      .get('https://api.adviceslip.com/advice/' + getRandomId(1, 200))
-      .then(response => {
-        setAdvice(response.data.slip.advice);
-      })
-      .catch(function (error) {
-        alert(error);
-      });
-  };
   return (
     <View style={style.rootContainer}>
       <View style={style.text}>
-        <Text>{advice}</Text>
+        <Text>{state}</Text>
       </View>
       <View style={style.button}>
-        <Pressable onPress={() => getAdvice()}>
-          <Text>Get Advice</Text>
+        <Pressable
+          onPress={() => {
+            dispatch({type: 'Add'});
+          }}>
+          <Text>Add</Text>
+        </Pressable>
+      </View>
+
+      <View style={style.button}>
+        <Pressable onPress={() => dispatch({type: 'Subtract'})}>
+          <Text>Subtract</Text>
         </Pressable>
       </View>
     </View>
@@ -46,8 +49,8 @@ export default App;
 
 const style = StyleSheet.create({
   rootContainer: {
-    flex: 1, 
-    alignItems: 'center', 
+    flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
   },
@@ -55,12 +58,12 @@ const style = StyleSheet.create({
     padding: 20,
     backgroundColor: '#1E90FF',
     borderRadius: 10,
-    marginTop: 50,
+    margin: 10,
   },
   text: {
     padding: 5,
     borderRadius: 5,
     borderWidth: 1,
-    margin: 10
+    margin: 10,
   },
 });
