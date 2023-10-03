@@ -48,7 +48,8 @@ const style = StyleSheet.create({
   rootContainer: {
     flex: 1, 
     alignItems: 'center', 
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: 'white',
   },
   button: {
     padding: 20,
