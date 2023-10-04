@@ -6,51 +6,40 @@
  * @flow strict-local
  */
 
-import React, {useState} from 'react';
-import {Text, View, StyleSheet, TextInput, Button} from 'react-native';
-import {act} from 'react-test-renderer';
+import React from 'react';
+import {Text, View, StyleSheet, FlatList, ScrollView} from 'react-native';
 
 function App() {
-  const [name, setname] = useState('');
-  const [password, setPassword] = useState('');
-  const [display, setdisplay] = useState(false);
+  const data = [
+    {
+      id: 1,
+      name: 'Gurjinder Singh',
+    },
+    {
+      id: 2,
+      name: 'Sher Singh',
+    },
+    {
+      id: 3,
+      name: 'Harinder Singh',
+    },
+  ];
 
-  const clearInput = () => {
-    setdisplay(false);
-    setname('');
-    setPassword('');
-  };
   return (
     <View style={style.rootContainer}>
-      <Text>Form</Text>
-      <TextInput
-        style={style.textInput}
-        placeholder="Enter Name"
-        value={name}
-        onChangeText={text => setname(text)}
+      <Text>Flat List</Text>
+      <FlatList
+        data={data}
+        renderItem={({item}) => (
+          <Text style={style.text}>{item.name}</Text>
+        )}
+        keyExtractor={(item)=> item.id}
       />
-
-      <TextInput
-        style={style.textInput}
-        placeholder="Enter Password"
-        secureTextEntry={true}
-        value={password}
-        onChangeText={text => setPassword(text)}
-      />
-
-      <Button title="Submit" onPress={()=> setdisplay(true)} />
-      <Button title="Clear" onPress={() => clearInput()} />
-      {
-        display
-        ?
-        <View> 
-            <Text style={style.textInput}>Name: {name}</Text>
-            <Text style={style.textInput}>Password: {password}</Text>
-        </View>
-        :
-        null
-      }
-
+      {/* <ScrollView>
+        {data.map(item => (
+          <Text style={style.text}>{item.name}</Text>
+        ))}
+      </ScrollView> */}
     </View>
   );
 }
@@ -62,7 +51,7 @@ const style = StyleSheet.create({
     marginTop: 70,
     backgroundColor: 'white',
   },
-  textInput: {
+  text: {
     fontSize: 26,
     borderWidth: 1,
     margin: 10,
