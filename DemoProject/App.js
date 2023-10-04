@@ -7,39 +7,57 @@
  */
 
 import React from 'react';
-import {Text, View, StyleSheet, FlatList, ScrollView} from 'react-native';
+import {Text, View, StyleSheet, ScrollView} from 'react-native';
 
 function App() {
   const data = [
     {
       id: 1,
-      name: 'Gurjinder Singh',
+      name: 'GS',
     },
     {
       id: 2,
-      name: 'Sher Singh',
+      name: 'SS',
     },
     {
       id: 3,
-      name: 'Harinder Singh',
+      name: 'HS',
+    },
+    {
+      id: 1,
+      name: 'GS',
+    },
+    {
+      id: 2,
+      name: 'SS',
+    },
+    {
+      id: 3,
+      name: 'HS',
+    },
+    {
+      id: 1,
+      name: 'GS',
+    },
+    {
+      id: 2,
+      name: 'SS',
+    },
+    {
+      id: 3,
+      name: 'HS',
     },
   ];
 
   return (
     <View style={style.rootContainer}>
-      <Text>Flat List</Text>
-      <FlatList
-        data={data}
-        renderItem={({item}) => (
-          <Text style={style.text}>{item.name}</Text>
-        )}
-        keyExtractor={(item)=> item.id}
-      />
-      {/* <ScrollView>
-        {data.map(item => (
-          <Text style={style.text}>{item.name}</Text>
-        ))}
-      </ScrollView> */}
+      <ScrollView>
+        <View style={style.rootContainer}>
+          {data.map(item => (
+            <Text style={style.text}>{item.name}</Text>
+          ))}
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -50,13 +68,18 @@ const style = StyleSheet.create({
     flex: 1,
     marginTop: 70,
     backgroundColor: 'white',
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   text: {
     fontSize: 26,
     borderWidth: 1,
-    margin: 10,
+    margin: 5,
     color: 'blue',
-    padding: 10,
+    backgroundColor: 'red',
+    padding: 30,
+    overflow: 'hidden',
     borderRadius: 10,
   },
 });
