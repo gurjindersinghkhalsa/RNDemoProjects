@@ -2,10 +2,10 @@ import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 
 export const UserData=(param)=>{
-  let value = param.item;
+  let value: String = param.item.name;
   
   return(
-    <Text style={style.text}>{value.name}</Text>
+    <Text style={style.text}>{value}</Text>
   )
 }
 

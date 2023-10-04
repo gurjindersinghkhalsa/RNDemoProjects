@@ -10,6 +10,7 @@ import React from 'react';
 import {Text, View, StyleSheet, FlatList, ScrollView} from 'react-native';
 import {UserData} from './Component/UserData';
 function App() {
+  const title: String = "Flat List with TS";
   const data = [
     {
       id: 1,
@@ -27,7 +28,7 @@ function App() {
 
   return (
     <View style={style.rootContainer}>
-      <Text>Flat List</Text>
+      <Text>{title}</Text>
       <FlatList
         data={data}
         renderItem={({item}) => (
