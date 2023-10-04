@@ -8,7 +8,7 @@
 
 import React from 'react';
 import {Text, View, StyleSheet, FlatList, ScrollView} from 'react-native';
-
+import {UserData} from './Component/UserData';
 function App() {
   const data = [
     {
@@ -31,7 +31,7 @@ function App() {
       <FlatList
         data={data}
         renderItem={({item}) => (
-          <Text style={style.text}>{item.name}</Text>
+          <UserData item={item}/>
         )}
         keyExtractor={(item)=> item.id}
       />
@@ -43,6 +43,8 @@ function App() {
     </View>
   );
 }
+
+
 export default App;
 
 const style = StyleSheet.create({
@@ -50,13 +52,5 @@ const style = StyleSheet.create({
     flex: 1,
     marginTop: 70,
     backgroundColor: 'white',
-  },
-  text: {
-    fontSize: 26,
-    borderWidth: 1,
-    margin: 10,
-    color: 'blue',
-    padding: 10,
-    borderRadius: 10,
-  },
+  }
 });
