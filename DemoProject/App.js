@@ -6,44 +6,35 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import {Text, View, StyleSheet, SectionList} from 'react-native';
+import React, { Component } from 'react';
+import {Text, View, StyleSheet, SectionList, Button, Alert} from 'react-native';
 import {UserData} from './Component/UserData';
 
-function App() {
-  const title: String = 'Flat List with TS';
-  const data = [
-    {
-      id: 1,
-      name: 'Gurjinder Singh',
-      data: ['iOS', 'Android', 'React Native'],
-    },
-    {
-      id: 2,
-      name: 'Sher Singh',
-      data: ['Angular', 'Android', 'React Native'],
-    },
-    {
-      id: 3,
-      name: 'Harinder Singh',
-      data: ['React JS', 'Android', 'React Native'], // key need to be data
-    },
-  ];
+class App extends Component { // React.Component
 
-  return (
-    <View style={style.rootContainer}>
-      <SectionList
-        sections={data}
-        renderItem={({item}) => <UserData item={item} />}
-        renderSectionHeader={({section: {id}}) => (
-          <Text style={{fontSize: 30, margin: 15}}>{id}</Text>
-        )}
-      />
-    </View>
-  );
+  constructor(){
+    super()
+    this.name = 'Class Component'
+  }
+ showMessage2() { // can't use function keyword
+    this.name = "Singh" // ???? how to change this and re render
+    Alert.alert('showMessage2');
+  }
+
+  showMessage=()=>{ // can't use const keyword
+    this.name = "Singh" // ???? how to change this and re render
+    Alert.alert('Button message');
+  }
+  // call without this show can't find var showMessage
+  render() {
+    return(
+      <View style={{backgroundColor:'white', flex: 1, marginTop:70}}>
+        <Text style={{fontSize: 30}}>{this.name}</Text>
+        <Button title='press me' onPress={this.showMessage2}></Button>
+      </View>
+    )
+  }
 }
-
-export default App;
 
 const style = StyleSheet.create({
   rootContainer: {
@@ -52,3 +43,4 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
   },
 });
+export default App;
