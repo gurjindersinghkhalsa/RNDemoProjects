@@ -1,7 +1,7 @@
 import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
 
-export const UserData = (param) => {
+export const UserData = param => {
   let value: String = param.item;
   return <Text style={style.text}>{value}</Text>;
 };
