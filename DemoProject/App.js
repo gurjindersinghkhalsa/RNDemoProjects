@@ -6,33 +6,44 @@
  * @flow strict-local
  */
 
-import React, { Component } from 'react';
-import {Text, View, StyleSheet, SectionList, Button, Alert} from 'react-native';
-import {UserData} from './Component/UserData';
-
-class App extends Component { // React.Component
-
-  constructor(){
-    super()
-    this.name = 'Class Component'
+import React, {Component} from 'react';
+import {Text, View, StyleSheet, TextInput, Button} from 'react-native';
+import Student from './Student';
+class App extends Component {
+  constructor() {
+    super(); // calling parent calls constructor
+    this.state = { // state obj
+      name: 'Gurjinder Singh', // this is state
+    };
+    // creates function once per component instance prefer this one
+    // this.changeName = this.changeName.bind(this) // for update state on button click
   }
- showMessage2() { // can't use function keyword
-    this.name = "Singh" // ???? how to change this and re render
-    Alert.alert('showMessage2');
+  updateName(val) {
+    this.setState({name: val})
   }
-
-  showMessage=()=>{ // can't use const keyword
-    this.name = "Singh" // ???? how to change this and re render
-    Alert.alert('Button message');
+  changeName() {
+    this.setState({name: 'on click update'})
   }
-  // call without this show can't find var showMessage
   render() {
-    return(
-      <View style={{backgroundColor:'white', flex: 1, marginTop:70}}>
-        <Text style={{fontSize: 30}}>{this.name}</Text>
-        <Button title='press me' onPress={this.showMessage2}></Button>
+    return (
+      <View style={{backgroundColor: 'white', flex: 1, marginTop: 120}}>
+        <Text>Hi Friends {this.state.name}</Text>
+        <TextInput
+          placeholder="Enter you name"
+          onChangeText={val => this.updateName(val)}
+        />
+
+        <Button
+          title="Press me"
+          style={{backgroundColor: 'red'}}
+          /* creates new function on every render call so avoid*/
+          onPress={()=>this.changeName()}
+            //OR
+          // onPress={this.changeName.bind(this)}
+        />
+        <Student name={this.state.name}/>
       </View>
-    )
+    );
   }
 }
 
