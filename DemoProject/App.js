@@ -45,7 +45,7 @@ const products = [
 
   return (
     <View style={styles.main}>
-      {/* <View style={{height: 72}}></View> */}
+      <View style={{height: 72}}></View>
       <Header/>
       <ScrollView>
 
