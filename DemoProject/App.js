@@ -7,65 +7,30 @@
  */
 
 import React, {useEffect, useState} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ActivityIndicator,
+  Button,
+} from 'react-native';
 const App = () => {
+  const [show, setIsShow] = useState(true);
 
-  const [selected, setSelected] = useState(1);
+  const showHideIndicator = () => {
+    setIsShow(!show);
+  };
 
-  var arrSkills = [
-    {
-      name: 'iOS developer',
-      id: 1,
-    },
-    {
-      name: 'Android developer',
-      id: 2,
-    },
-    {
-      name: 'Flutter developer',
-      id: 3,
-    },
-    {
-      name: 'React Native developer',
-      id: 4,
-    },
-
-  ]
-  return(
-    <View style={styles.main}>  
-      <View style={{height:72}}></View>
-      
-      {arrSkills.map(function(item){
-        return (
-        <TouchableOpacity 
-        key={item.id}
-        onPress={()=>setSelected(item.id)}>
-      
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <View style={styles.roundView}>
-           {selected == item.id ? <View style={styles.roundViewInner}></View> : null}
-          </View>
-          <Text>{item.name}</Text>
-        </View>
-
-      </TouchableOpacity>
-      )
-      })}
-
-      
-
-      {/* <TouchableOpacity onPress={()=>setSelected(2)}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <View style={styles.roundView}>
-          {selected == 2 ? <View style={styles.roundViewInner}></View> : null}
-          </View>
-          <Text>Radio 2</Text>
-        </View>
-      </TouchableOpacity> */}
-
+  return (
+    <View style={styles.main}>
+      <View style={{height: 72}}></View>
+      <ActivityIndicator size={'large'} color={'red'} animating={show} />
+      <ActivityIndicator size={'large'} color={'green'} animating={show} />
+      <Button title="Show/Hide Indicator" onPress={showHideIndicator} />
     </View>
-  )
-}
+  );
+};
 const styles = StyleSheet.create({
   main: {
     flex: 1,
@@ -79,14 +44,14 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: 'skyblue',
     margin: 5,
-    alignItems:'center',
-    justifyContent: 'center'
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  roundViewInner:  {
+  roundViewInner: {
     height: 16,
     width: 16,
     borderRadius: 8,
     backgroundColor: 'skyblue',
   },
-})
+});
 export default App;
