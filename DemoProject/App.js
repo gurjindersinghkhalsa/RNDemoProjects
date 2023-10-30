@@ -11,23 +11,28 @@ import {
   Text,
   View,
   StyleSheet,
-  TouchableOpacity,
-  ActivityIndicator,
-  Button,
+  Modal,
+  Button
 } from 'react-native';
 const App = () => {
   const [show, setIsShow] = useState(true);
-
-  const showHideIndicator = () => {
-    setIsShow(!show);
-  };
-
   return (
     <View style={styles.main}>
       <View style={{height: 72}}></View>
-      <ActivityIndicator size={'large'} color={'red'} animating={show} />
-      <ActivityIndicator size={'large'} color={'green'} animating={show} />
-      <Button title="Show/Hide Indicator" onPress={showHideIndicator} />
+      <Modal
+      animationType='slide'
+      visible={show}
+      >
+        <View style={{backgroundColor: 'white', flex: 1, alignItems:'center', justifyContent: 'center',}}>
+          <View style={styles.textBgView}>
+              <Text style = {{fontSize: 18, }}>This is Modal Examle</Text>
+              <View style={{backgroundColor: 'black', marginTop: 20, borderRadius: 10}}>
+              <Button color={'white'} title='Hide' onPress={()=> setIsShow(false)}/>
+              </View>
+          </View>
+        </View>
+      </Modal>
+      <Button title='Show Modal' onPress={()=>setIsShow(true)}/>
     </View>
   );
 };
@@ -36,22 +41,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  roundView: {
-    height: 30,
-    width: 30,
-    borderRadius: 15,
-    // backgroundColor: 'skyblue',
-    borderWidth: 4,
-    borderColor: 'skyblue',
-    margin: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  roundViewInner: {
-    height: 16,
-    width: 16,
-    borderRadius: 8,
-    backgroundColor: 'skyblue',
-  },
+  textBgView: {
+    backgroundColor: 'yellow', 
+    padding: 30, 
+    borderRadius: 10,
+    shadowColor: '#171717',
+    shadowOffset: {width: -2, height: 4},
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    }
 });
 export default App;
