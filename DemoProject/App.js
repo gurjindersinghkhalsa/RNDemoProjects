@@ -12,27 +12,49 @@ import {
   View,
   StyleSheet,
   Modal,
-  Button
+  Button,
+  Image,
+  ScrollView
 } from 'react-native';
+import Product from './Component/Product';
+import Header from './Component/Header';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+
 const App = () => {
-  const [show, setIsShow] = useState(true);
+
+const products = [
+ {
+   name: 'Samsung',
+  color: 'white',
+  price: 30000,
+  image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHXqSjVhEFV2LxfaxlIlFAuuRwNQvn7j9YQfERx9uh9wguU2kAAFrQydPxAgqh4IwmtQw&usqp=CAU',
+},
+{
+  name: 'iPhone',
+ color: 'white',
+ price: 60000,
+ image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-tUd44pAPLjXkws1kdQ7gvvsDjWg2CFudlqS8DOaXX4Im_wzMDnz1NwtvcHJUHhzAoa8&usqp=CAU',
+},
+{
+  name: 'Motorola',
+ color: 'red',
+ price: 10000,
+ image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHXqSjVhEFV2LxfaxlIlFAuuRwNQvn7j9YQfERx9uh9wguU2kAAFrQydPxAgqh4IwmtQw&usqp=CAU'
+}
+]
+
   return (
     <View style={styles.main}>
-      <View style={{height: 72}}></View>
-      <Modal
-      animationType='slide'
-      visible={show}
-      >
-        <View style={{backgroundColor: 'white', flex: 1, alignItems:'center', justifyContent: 'center',}}>
-          <View style={styles.textBgView}>
-              <Text style = {{fontSize: 18, }}>This is Modal Examle</Text>
-              <View style={{backgroundColor: 'black', marginTop: 20, borderRadius: 10}}>
-              <Button color={'white'} title='Hide' onPress={()=> setIsShow(false)}/>
-              </View>
-          </View>
-        </View>
-      </Modal>
-      <Button title='Show Modal' onPress={()=>setIsShow(true)}/>
+      {/* <View style={{height: 72}}></View> */}
+      <Header/>
+      <ScrollView>
+
+{
+  products.map((item)=>{
+    return <Product item={item}/>
+  })
+}
+</ScrollView>
     </View>
   );
 };
