@@ -12,27 +12,56 @@ const App = () => {
 
   const [selected, setSelected] = useState(1);
 
+  var arrSkills = [
+    {
+      name: 'iOS developer',
+      id: 1,
+    },
+    {
+      name: 'Android developer',
+      id: 2,
+    },
+    {
+      name: 'Flutter developer',
+      id: 3,
+    },
+    {
+      name: 'React Native developer',
+      id: 4,
+    },
+
+  ]
   return(
     <View style={styles.main}>  
       <View style={{height:72}}></View>
       
-      <TouchableOpacity onPress={()=>setSelected(1)}>
+      {arrSkills.map(function(item){
+        return (
+        <TouchableOpacity 
+        key={item.id}
+        onPress={()=>setSelected(item.id)}>
+      
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <View style={styles.roundView}>
-           {selected == 1 ? <View style={styles.roundViewInner}></View> : null}
+           {selected == item.id ? <View style={styles.roundViewInner}></View> : null}
           </View>
-          <Text>Radio 1</Text>
+          <Text>{item.name}</Text>
         </View>
-      </TouchableOpacity>
 
-      <TouchableOpacity onPress={()=>setSelected(2)}>
+      </TouchableOpacity>
+      )
+      })}
+
+      
+
+      {/* <TouchableOpacity onPress={()=>setSelected(2)}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <View style={styles.roundView}>
           {selected == 2 ? <View style={styles.roundViewInner}></View> : null}
           </View>
           <Text>Radio 2</Text>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
     </View>
   )
@@ -46,7 +75,9 @@ const styles = StyleSheet.create({
     height: 30,
     width: 30,
     borderRadius: 15,
-    backgroundColor: 'skyblue',
+    // backgroundColor: 'skyblue',
+    borderWidth: 4,
+    borderColor: 'skyblue',
     margin: 5,
     alignItems:'center',
     justifyContent: 'center'
@@ -55,7 +86,7 @@ const styles = StyleSheet.create({
     height: 16,
     width: 16,
     borderRadius: 8,
-    backgroundColor: 'white',
+    backgroundColor: 'skyblue',
   },
 })
 export default App;
