@@ -7,32 +7,55 @@
  */
 
 import React, {useEffect, useState} from 'react';
-import {Text, View, Button} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 const App = () => {
 
-  const [show, setshow] = useState(false)
-  return (
-    <View style={{backgroundColor: 'white', flex: 1, marginTop: 100}}>
-      <Button title="Toggle Component" onPress={() => setshow(!show)} />
-      { show ? <StudentP name='Gurjinder Singh'/> : null }
-    </View>
-  );
-};
+  const [selected, setSelected] = useState(1);
 
-const StudentP=(props)=>{
-  let timer = setInterval(() => {
-    console.warn('Timere');
-  }, 2000); // This will call every 2 sec
-
-  useEffect(()=>{
-    return ()=> {
-      clearInterval(timer);
-    }
-  })
   return(
-    <View>
-      <Text style={{backgroundColor:'red'}}>{props.name}</Text>
+    <View style={styles.main}>  
+      <View style={{height:72}}></View>
+      
+      <TouchableOpacity onPress={()=>setSelected(1)}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={styles.roundView}>
+           {selected == 1 ? <View style={styles.roundViewInner}></View> : null}
+          </View>
+          <Text>Radio 1</Text>
+        </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={()=>setSelected(2)}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={styles.roundView}>
+          {selected == 2 ? <View style={styles.roundViewInner}></View> : null}
+          </View>
+          <Text>Radio 2</Text>
+        </View>
+      </TouchableOpacity>
+
     </View>
   )
 }
+const styles = StyleSheet.create({
+  main: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  roundView: {
+    height: 30,
+    width: 30,
+    borderRadius: 15,
+    backgroundColor: 'skyblue',
+    margin: 5,
+    alignItems:'center',
+    justifyContent: 'center'
+  },
+  roundViewInner:  {
+    height: 16,
+    width: 16,
+    borderRadius: 8,
+    backgroundColor: 'white',
+  },
+})
 export default App;
