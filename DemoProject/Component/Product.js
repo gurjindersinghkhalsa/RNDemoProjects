@@ -1,20 +1,38 @@
-import {View, Text, Image, Button} from 'react-native';
-import React from 'react';
-import {useDispatch} from 'react-redux';
-import { addToCart } from './redux/action';
-import {useSelector} from 'react-redux';
-
+import {View, Text, Image, Button, Alert} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {addToCartAction, removeFromCartAction} from './redux/action';
 
 const Product = props => {
   const item = props.item;
   const dispatch = useDispatch();
+  const [isAdded, setisAdded] = useState(false);
+  const cartItems = useSelector(state => state.reducer);
 
-  const handleAddToCart=()=>{
-    dispatch(addToCart(item));
+  useEffect(() => {
+    // console.log('here', cartItems);
+    if(cartItems) {
+      const allItems = cartItems.filter((element)=>{
+        return element.name === item.name
+      })
+      if(allItems.length) {
+        setisAdded(true);
+      } else {
+        setisAdded(false);
+      }
+    }
+  }, [cartItems]);
+
+  const removeFromCart=(item)=>{
+    dispatch(removeFromCartAction(item.name));
   }
+  const handleAddToCart = (item) => {
+    dispatch(addToCartAction(item));
+  };
 
   return (
     <View
+      id={item.id}
       style={{
         flex: 1,
         padding: 20,
@@ -26,7 +44,14 @@ const Product = props => {
       <Text>{item.price}</Text>
       <Text>{item.color}</Text>
       <Image source={{uri: item.image}} style={{width: 200, height: 160}} />
-      <Button title="Add To Cart" onPress={()=>handleAddToCart(item)} />
+      {isAdded ? (
+        <Button
+          title="Remove From Cart"
+          onPress={() => removeFromCart(item)}
+        />
+      ) : (
+        <Button title="Add To Cart" onPress={() => handleAddToCart(item)} />
+      )}
     </View>
   );
 };

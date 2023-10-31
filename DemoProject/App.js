@@ -16,61 +16,33 @@ import {
   Image,
   ScrollView
 } from 'react-native';
-import Product from './Component/Product';
-import Header from './Component/Header';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack'
+import ProductWrapper from './Component/ProductWrapper';
+import UserList from './Component/UserList';
+
+const Stack = createNativeStackNavigator();
 
 const App = () => {
 
-const products = [
- {
-   name: 'Samsung',
-  color: 'white',
-  price: 30000,
-  image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHXqSjVhEFV2LxfaxlIlFAuuRwNQvn7j9YQfERx9uh9wguU2kAAFrQydPxAgqh4IwmtQw&usqp=CAU',
-},
-{
-  name: 'iPhone',
- color: 'white',
- price: 60000,
- image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-tUd44pAPLjXkws1kdQ7gvvsDjWg2CFudlqS8DOaXX4Im_wzMDnz1NwtvcHJUHhzAoa8&usqp=CAU',
-},
-{
-  name: 'Motorola',
- color: 'red',
- price: 10000,
- image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHXqSjVhEFV2LxfaxlIlFAuuRwNQvn7j9YQfERx9uh9wguU2kAAFrQydPxAgqh4IwmtQw&usqp=CAU'
-}
-]
-
   return (
-    <View style={styles.main}>
-      <View style={{height: 72}}></View>
-      <Header/>
-      <ScrollView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name='Home' component={ProductWrapper}/>
+         <Stack.Screen name='User' component={UserList}/>
+      </Stack.Navigator>
+    </NavigationContainer>
 
-{
-  products.map((item)=>{
-    return <Product item={item}/>
-  })
-}
-</ScrollView>
-    </View>
+    // <View style={{backgroundColor:'white'}}>
+    //   <Text>Gurjinder SIngh</Text>
+    // </View>
   );
 };
 const styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: 'white',
-  },
-  textBgView: {
-    backgroundColor: 'yellow', 
-    padding: 30, 
-    borderRadius: 10,
-    shadowColor: '#171717',
-    shadowOffset: {width: -2, height: 4},
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    }
+  }
 });
 export default App;

@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux'; //redux
 
 const Header = () => {
+  //useSelector hook which take callback fun, state is reducer state
   const cartItems = useSelector((state) => state.reducer);// Redux
 
   const [cartItemsCount, setcartItemsCount] = useState(0);
