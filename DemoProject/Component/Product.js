@@ -32,7 +32,6 @@ const Product = props => {
 
   return (
     <View
-      id={item.id}
       style={{
         flex: 1,
         padding: 20,

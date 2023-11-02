@@ -23,18 +23,21 @@ const ProductWrapper = ({navigation}) => { // default param navigation
 
 const products = [
  {
+  id: 1,
    name: 'Samsung',
   color: 'white',
   price: 30000,
   image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHXqSjVhEFV2LxfaxlIlFAuuRwNQvn7j9YQfERx9uh9wguU2kAAFrQydPxAgqh4IwmtQw&usqp=CAU',
 },
 {
+  id: 2,
   name: 'iPhone',
  color: 'white',
  price: 60000,
  image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-tUd44pAPLjXkws1kdQ7gvvsDjWg2CFudlqS8DOaXX4Im_wzMDnz1NwtvcHJUHhzAoa8&usqp=CAU',
 },
 {
+  id: 3,
   name: 'Motorola',
  color: 'red',
  price: 10000,
@@ -50,7 +53,7 @@ const products = [
       <ScrollView>
 {
   products.map((item)=>{
-    return <Product item={item}/>
+    return <Product item={item} key={item.id}/>
   })
 }
 </ScrollView>

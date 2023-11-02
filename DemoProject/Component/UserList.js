@@ -6,12 +6,16 @@ import { getUserList } from './redux/action';
 const UserList = () => {
 
   const userList = useSelector((state)=> state.reducer);
-  let finalUsers = userList[0].users;
+  // we are storing data in arr so receiving arr. from server we are rec object
+  // if (userList.length) {
+  //   let finalUsers = userList[0].users;
+  // }
+  
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUserList());
   });
-
+//  console.warn(userList)
   return (
     <View
       style={{
@@ -23,11 +27,11 @@ const UserList = () => {
       }}>
         <ScrollView>
         {
-          userList.length
+          userList.length > 0
            ?
-           finalUsers.map((item)=> (<Text style={{fontSize: 19, fontWeight: '400'}}>{item.id}  {item.firstName}</Text>))
+           userList[0].users.map((item)=> (<Text key='{item.id}' style={{fontSize: 19, fontWeight: '400'}}>{item.id}  {item.firstName}</Text>))
           :
-          null
+          <Text style={{fontSize: 30}}>Waiting for API Response</Text>
         }
         </ScrollView>
       <Text>User List</Text>
