@@ -1,7 +1,7 @@
 // Reducer perform the given action
 // Store data saved
 
-import {ADD_TO_CART, REMOVE_FROM_CART} from './constants';
+import {ADD_TO_CART, REMOVE_FROM_CART, SET_USER_DATA} from './constants';
 const initialSate = []; // this is type of data we want to store can be any type
 
 export const reducer = (state = initialSate, action) => {
@@ -19,6 +19,12 @@ export const reducer = (state = initialSate, action) => {
       });
       console.log(state.length, newData.length);
       return [...newData]; // why ... operator here why not newData work
+    
+    case SET_USER_DATA:
+      return [
+        ...state,
+        action.data
+      ]
     default:
       return state;
   }

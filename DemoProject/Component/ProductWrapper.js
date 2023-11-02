@@ -48,7 +48,6 @@ const products = [
       {/* <View style={{height: 72}}></View> */}
       <Header/>
       <ScrollView>
-
 {
   products.map((item)=>{
     return <Product item={item}/>
